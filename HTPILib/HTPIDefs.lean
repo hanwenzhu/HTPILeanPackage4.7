@@ -16,7 +16,7 @@ def Iff.rtl {p q : Prop} (h : p ↔ q) := h.mpr
 
 --Make sure Lean understands {x} and ∅ as Sets, not Finsets
 attribute [default_instance] Set.instSingletonSet
-attribute [default_instance] Set.instEmptyCollection
+attribute [default_instance] Set.instEmptyCollectionSet
 
 -- Used in one exercise in Chapter 3.
 notation:50 a:50 " ⊈ " b:50 => ¬ (a ⊆ b)
@@ -40,10 +40,10 @@ theorem not_or_not_distrib {p q : Prop} : ¬(p ∨ ¬ q) ↔ (¬ p ∧ q) := by
   rw [not_or, Classical.not_not]
 
 theorem not_imp_not_iff_and {p q : Prop} : ¬ (p → ¬ q) ↔ p ∧ q := by
-  rw [Classical.not_imp, Classical.not_not]
+  rw [not_imp, Classical.not_not]
 
 theorem not_imp_iff_not_and {p q : Prop} : ¬ (q → p) ↔ ¬ p ∧ q := by
-  rw [Classical.not_imp]
+  rw [not_imp]
   exact And.comm
 
 theorem not_not_iff {p q : Prop} : ¬(¬p ↔ q) ↔ (p ↔ q) := by
@@ -254,7 +254,7 @@ def fixElt (e : Expr) (doFix : Bool) : TacticM Expr := do
             return (mkApp5 (mkConst ``Membership.mem [lev, lev])
               t
               (mkApp (mkConst ``Set [lev]) t)
-              (mkApp (mkConst ``Set.instMembership [lev]) t)
+              (mkApp (mkConst ``Set.instMembershipSet [lev]) t)
               elt
               st)
           | _ => return e
