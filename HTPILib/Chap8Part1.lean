@@ -600,3 +600,7 @@ theorem one_elt_iff_singleton {U : Type} (A : Set U) :
     show numElts {x} 1 from singleton_one_elt x
     done
   done
+
+/- BEGIN EXERCISES -/
+
+namespace Exercises
